@@ -8,43 +8,50 @@
             <div class="card-body">
                 <h1 class="card-title"><%= article.title %></h1>
 
-                <h6 class="card-subtitle mb-2 text-muted"><%= article.createdAt.toLocaleDateString() %></h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    <%= article.createdAt.toLocaleDateString() %>
+                </h6>
 
                 <div class="mb-4"><%= article.content %></div>
 
-                
-                <a href="/articles/comment/<%= article.id %>" type="button" class="btn btn-primary">comment</a>
-
-
-
-                <!-- <ul>
+                <a 
+                    href="/articles/comment/<%= article.id %>" 
+                    type="button" 
+                    class="btn btn-primary">
+                    comment
+                </a>
+                <ul>
                     <% article.comment.forEach(function(comment) { %>
-                      <li>
-                        <%= comment.text %>
-                      </li>
-                    <% }); %> -->
+                      <li><%= comment %></li>
+                    <% }); %>
+                </ul>
 
-
-            <!-- 
-                <% article.comment.forEach(text => { %>   
-                    <div class="card-body"><%= text["text"] %></div>
-                <% }) %> -->
-
-                <div><%= article.like.length %></div>                
-                 
-                <form action="/articles/<%= article.id %>" method="POST">
-                    <input hidden name="like" value="<%= article.like %>" />
-
-                    <button type="submit" class="btn">
-                        <i class="far fa-thumbs-up  fa-lg"></i> 
-                    </button>
-
-                </form>
-
+                <div class="d-flex flex-row align-items-center">  
+                    <div><%= article.like.length %></div>              
+                    <form action="/articles/like/<%= article.id %>" method="POST">
+                        <input hidden name="like" value="<%= article.like %>" />
+                        <button type="submit" class="btn">
+                            <i class="far fa-thumbs-up  fa-lg"></i> 
+                        </button>
+                    </form>
+                    
+                    <div><%= article.dislike.length %></div>
+                    <form action="/articles/dislike/<%= article.id %>" method="POST">
+                        <input hidden name="dislike" value="<%= article.dislike %>" />
+                        <button type="submit" class="btn">
+                            <i class="far fa-thumbs-down  fa-lg"></i> 
+                        </button>
+                    </form> 
+                </div>
 
                 <a href="/" type="button" class="btn btn-info mt-4">All Articles</a>
             
-                <a href="/articles/edit/<%= article.id %>" type="button" class="btn btn-warning mt-4">Edit</a>
+                <a 
+                    href="/articles/edit/<%= article.id %>" 
+                    type="button" 
+                    class="btn btn-warning mt-4">
+                    Edit
+                </a>
             </div>
         </div>
     </div>

@@ -17,20 +17,26 @@ const articleSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    comment: [{
-        text: String,
-        // _id: false
-    }],
-    // like: {
-    //     type: Number,
-    //     default: 0
-    // }
-    like: [{
-        id: String
-    }]
+    comment: [
+        {
+            type: String
+            // text: String <-- wrong
+        }
+    ],
+    like: [
+        {
+            type: String
+            // id: String <-- wrong
+        }
+    ],
+    dislike: [
+        {
+            type: String
+        }
+    ]
 })
 
-
+// method for counting Likes
 articleSchema.methods.countLike = function() {
 
     let newCount = 0
@@ -39,23 +45,6 @@ articleSchema.methods.countLike = function() {
     this.like = newCount
     return this.save()
 }
-
-
-
-
-// articleSchema.methods.addComment = function(comment) {
-
-//     const updatedComment = [...this.comment, ]
-//     console.log(comment)
-//     console.log(updatedComment)
-
-//     updatedComment.push({comment: comment})
-    
-//     this.comment = updatedComment
-//     return this.save()
-// }
-
-
 
 
 module.exports = mongoose.model('Article', articleSchema)
